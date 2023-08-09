@@ -19,8 +19,8 @@ def pendulum_simplified(t, x, g, length):
     return [x[1], (-g/length)*x[0]]
 
 
-def locate_root(index, sol_time, sol, i, indexes):
-    return [(((sol_time[indexes[index]]+0.05)*sol[i])-(sol_time[indexes[index]]*sol[i+1]))/(sol[i]-sol[i+1])]
+def locate_root(index, sol_time, sol, indexes):
+    return (((sol_time[indexes[index]]+0.05)*sol[indexes[index]])-(sol_time[indexes[index]]*sol[indexes[index]+1]))/(sol[indexes[index]]-sol[indexes[index]+1])
 
 
 def period_time(sol, sol_time):
