@@ -9,4 +9,4 @@ class TestMethods(unittest.TestCase):
         sol = [-1, 1, -1, 1]
         sol_time = [0, 1, 2, 3]
         period = period_time(sol, sol_time)
-        self.assertAlmostEqual(period, 3)
+        self.assertAlmostEqual(period, 2)
