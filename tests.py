@@ -1,5 +1,5 @@
 import unittest
-from .tuesdaytask import period_time
+from bayes_pendulum.tuesdaytask  import period_time
 
 class TestMethods(unittest.TestCase):
 
