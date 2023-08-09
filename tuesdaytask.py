@@ -15,20 +15,27 @@ def pendulum_simplified(t,x,g,length):
     """x is the state consisting of [postion, x1]"""
     return [x[1] ,(-g/length)*x[0]]
 
+#def equation(sol_t, sol, i):
+ #   return [(sol_t[i+1]*sol[i]-sol_t[i]*sol[i+1])/(sol[i]-sol[i+1])]
+
 def period_time(sol, sol_time):
     indexes = []
     for i in range(len(sol)):
         if i+2 > len(sol):
             break
         if sol[i] < 0 and sol[i+1] >= 0 or sol[i] <= 0 and sol[i+1] > 0:
+        #if (sol_time[i+1]*sol[i]-sol_time[i]*sol[i+1])/(sol[i]-sol[i+1]) == 0:
             indexes.append(i)
-    try:        
-        start_time = sol_time[indexes[0]]
-        end_time = sol_time[indexes[1]]
-        total_time = end_time - start_time
-        return total_time
-    except:
-        return print("A period couldn't be calculated")
+    #try:
+
+        #start_time = sol_time[indexes[0]]
+        #end_time = sol_time[indexes[1]]
+    start_time = (((sol_time[indexes[0]]+0.005)*sol[i])-(sol_time[indexes[0]]*sol[i+1]))/(sol[i]-sol[i+1])
+    end_time = (((sol_time[indexes[1]]+0.005)*sol[i])-(sol_time[indexes[1]]*sol[i+1]))/(sol[i]-sol[i+1])
+    total_time = end_time - start_time
+    return total_time
+    #except:
+     #   return print("A period couldn't be calculated")
 
 full_periods = []
 simpl_periods = []
