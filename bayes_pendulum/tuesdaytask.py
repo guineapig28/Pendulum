@@ -31,8 +31,8 @@ def period_time(sol, sol_time):
         if sol[i] < 0 and sol[i+1] >= 0 or sol[i] <= 0 and sol[i+1] > 0:
             # if (sol_time[i+1]*sol[i]-sol_time[i]*sol[i+1])/(sol[i]-sol[i+1]) == 0:
             indexes.append(i)
-    start_time = locate_root(0, sol_time, sol, i, indexes)
-    end_time = locate_root(1, sol_time, sol, i, indexes)
+    start_time = locate_root(0, sol_time, sol,  indexes)
+    end_time = locate_root(1, sol_time, sol, indexes)
     total_time = end_time - start_time
     return total_time
 
