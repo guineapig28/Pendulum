@@ -6,6 +6,8 @@ from scipy.optimize import curve_fit, minimize, dual_annealing
 from scipy.integrate import solve_ivp
 from matplotlib import pyplot as plt
 
+t_gap = 0.0005
+
 # The ODE systems
 
 
@@ -20,7 +22,7 @@ def pendulum_simplified(t, x, g, length):
 
 
 def locate_root(index, sol_time, sol, indexes):
-    return (((sol_time[indexes[index]]+0.005)*sol[indexes[index]])-(sol_time[indexes[index]]*sol[indexes[index]+1]))/(sol[indexes[index]]-sol[indexes[index]+1])
+    return (((sol_time[indexes[index]]+t_gap)*sol[indexes[index]])-(sol_time[indexes[index]]*sol[indexes[index]+1]))/(sol[indexes[index]]-sol[indexes[index]+1])
 
 
 def period_time(sol, sol_time):
@@ -29,7 +31,6 @@ def period_time(sol, sol_time):
         if i+2 > len(sol):
             break
         if sol[i] < 0 and sol[i+1] >= 0 or sol[i] <= 0 and sol[i+1] > 0:
-            # if (sol_time[i+1]*sol[i]-sol_time[i]*sol[i+1])/(sol[i]-sol[i+1]) == 0:
             indexes.append(i)
     start_time = locate_root(0, sol_time, sol,  indexes)
     end_time = locate_root(1, sol_time, sol, indexes)
@@ -42,9 +43,9 @@ def main():
     simpl_periods = []
     angle = []
 
-    t_vec = np.linspace(0, 5, 1000)
+    t_vec = np.arange(0, 5, t_gap)
 
-    for i in range(1, 90):
+    for i in range(1, 45):
         # If the starting angle is small, we don't care about the difference in the models, not significant
         starting_angle = i/57.2958
         length = 1  # pendulum length
